@@ -34,9 +34,14 @@ void app_main(void)
         printf("Error with number: %d\n", bme280_err);
     }
 
+    bme280_err = bme280_set_mode(BME280_MOD_NORMAL);
+    if(bme280_err) {
+        printf("Error with number: %d\n", bme280_err);
+    }
+
     while(1)
     {
-        bme280_read_data(&bme280_dev);
+        bme280_read_sensor_data(&bme280_dev);
         vTaskDelay(pdMS_TO_TICKS(1000));  
         printf("Pressure is %f\n", bme280_dev.pressure);
         printf("Temp is %f\n", bme280_dev.temperature);
