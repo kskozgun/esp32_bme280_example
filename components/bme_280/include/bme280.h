@@ -107,11 +107,14 @@ typedef struct {
     float temperature;
     float humidity;
     float pressure;
+    uint8_t oversampling_temp;
+    uint8_t oversampling_hum;
+    uint8_t oversampling_pres;
 } bme280_dev_t;
 
 bme280_err_t bme280_set_mode(uint8_t sensor_mode);
 
-bme280_err_t bme280_init(bme280_dev_t *dev, uint8_t temp_samp, uint8_t hum_samp, uint8_t press_samp);
+bme280_err_t bme280_init(bme280_dev_t *dev);
 
 bme280_err_t bme280_compensate_temp(bme280_dev_t *dev);
 
