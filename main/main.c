@@ -27,9 +27,13 @@ void app_main(void)
 {
     bme280_err_t bme280_err;
 
+    bme280_dev.oversampling_temp = BME280_TEMP_OVER_1;
+    bme280_dev.oversampling_hum = BME280_HUM_SKIP;
+    bme280_dev.oversampling_pres = BME280_PRESS_OVER_2;
+
     i2c_init(I2C_NUM_0, &conf);
 
-    bme280_err = bme280_init(&bme280_dev, BME280_TEMP_OVER_1, BME280_HUM_OVER_1, BME280_PRESS_OVER_1);
+    bme280_err = bme280_init(&bme280_dev);
     if(bme280_err) {
         printf("Error with number: %d\n", bme280_err);
     }

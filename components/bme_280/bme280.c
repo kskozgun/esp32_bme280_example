@@ -92,7 +92,7 @@ static bme280_err_t bme280_read_trim_data(bme280_trim_data_t *bme280_trim_data)
     return BME280_OK;
 }
 
-bme280_err_t bme280_init(bme280_dev_t *dev, uint8_t temp_samp, uint8_t hum_samp, uint8_t press_samp)
+bme280_err_t bme280_init(bme280_dev_t *dev)
 {
     bme280_err_t ret;
     int8_t i2c_ret;
@@ -111,9 +111,9 @@ bme280_err_t bme280_init(bme280_dev_t *dev, uint8_t temp_samp, uint8_t hum_samp,
         return ret;
     }
 
-    ret += bme280_oversamp_temp(temp_samp);
-    ret += bme280_oversamp_press(press_samp);
-    ret += bme280_oversamp_hum(hum_samp);
+    ret += bme280_oversamp_temp(dev->oversampling_temp);
+    ret += bme280_oversamp_press(dev->oversampling_pres);
+    ret += bme280_oversamp_hum(dev->oversampling_hum);
     if(ret) {
         return BME280_I2C_ERR;
     }
