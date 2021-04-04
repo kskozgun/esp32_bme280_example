@@ -22,8 +22,6 @@
 #define BME280_REG_CTRL_MEAS 0xF4
 #define BME280_REG_CTRL_HUM 0xF2
 
-
-
 #define BME280_TEMP_TRIM_LEN 6
 #define BME280_TEMP_PRES_TRIM_LEN 24
 #define BME280_HUM_1_TRIM_LEN 1
@@ -111,6 +109,8 @@ typedef struct {
     float pressure;
 } bme280_dev_t;
 
+bme280_err_t bme280_set_mode(uint8_t sensor_mode);
+
 bme280_err_t bme280_init(bme280_dev_t *dev, uint8_t temp_samp, uint8_t hum_samp, uint8_t press_samp);
 
 bme280_err_t bme280_compensate_temp(bme280_dev_t *dev);
@@ -119,8 +119,7 @@ bme280_err_t bme280_compensate_hum(bme280_dev_t *dev);
 
 bme280_err_t bme280_compensate_press(bme280_dev_t *dev);
 
-bme280_err_t bme280_read_data(bme280_dev_t *dev);
-
+bme280_err_t bme280_read_sensor_data(bme280_dev_t *dev);
 
 
 

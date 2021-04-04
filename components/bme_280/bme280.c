@@ -21,7 +21,7 @@ static bme280_err_t bme280_oversamp_press(uint8_t oversamp_mode);
 
 
 
-static bme280_err_t bme280_set_mode(uint8_t sensor_mode)
+bme280_err_t bme280_set_mode(uint8_t sensor_mode)
 {
     int8_t i2c_ret;
     uint8_t status;
@@ -237,13 +237,9 @@ bme280_err_t bme280_compensate_press(bme280_dev_t *dev)
     return 0;
 }
 
-bme280_err_t bme280_read_data(bme280_dev_t *dev)
+bme280_err_t bme280_read_sensor_data(bme280_dev_t *dev)
 {
     bme280_err_t ret;
-    ret = bme280_set_mode(BME280_MOD_FORCED);
-    if(ret){
-        return ret;
-    }
 
     ret = bme280_compensate_temp(dev);
     if(ret){
@@ -262,6 +258,7 @@ bme280_err_t bme280_read_data(bme280_dev_t *dev)
 
     return BME280_OK;
 }
+
 
 static bme280_err_t bme280_oversamp_temp(uint8_t oversamp_mode)
 {
